@@ -8,7 +8,10 @@ export function useVideoAvailable(src){
     let cancelled=false;
     setAvailable(null);
     fetch(src,{method:'HEAD'})
-      .then(res=>{if(!cancelled)setAvailable(res.ok);})
+      .then(res=>{
+        const contentType=res.headers.get('content-type')||'';
+        if(!cancelled)setAvailable(res.ok&&contentType.toLowerCase().startsWith('video/'));
+      })
       .catch(()=>{if(!cancelled)setAvailable(false);});
     return()=>{cancelled=true;};
   },[src]);

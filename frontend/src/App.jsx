@@ -5,6 +5,7 @@ import { ArrowUpRight, ArrowLeft, ArrowRight, Check, Database, GitBranch, Layers
 import { projects } from './projects';
 import { useVideoAvailable } from './PitchPrimitives';
 import { retrievalExample, revisionCycle, reliabilityFacts } from './contentEngineEvidence';
+import { AutomationShowcase, ContentEngineFlow, PitchStoryCarousel, ProjectCover } from './ProjectCovers';
 
 const github = 'https://github.com/ahmadsmadi-oss';
 
@@ -26,7 +27,7 @@ function Header() {
 
 export function EngineDiagram({ large = false }) {
   return <div className={`engine-diagram ${large ? 'large' : ''}`} aria-label="Architecture illustration: brand memory feeds generation, human review sends feedback for revision">
-    <div className="diagram-caption"><span className="live-dot"/> BRAND-AWARE WORKFLOW <span>01 → 04</span></div>
+    <div className="diagram-caption"><span className="live-dot"/> BRAND-AWARE WORKFLOW <span>INTAKE → APPROVAL</span></div>
     <div className="memory-node"><Database size={18}/><div>Brand memory<small>Context, tone, past feedback</small></div><span className="node-chip">RAG</span></div>
     <div className="connector vertical"/>
     <div className="diagram-middle"><div className="diagram-node"><GitBranch size={18}/><span>Generate</span><small>LangGraph</small></div><ArrowRight size={18}/><div className="diagram-node review"><MessageSquare size={18}/><span>Human review</span><small>Pause & resume</small></div></div>
@@ -83,13 +84,16 @@ function Portfolio() {
         <div className="hero-foot"><span>DISCOVERY → SYSTEM DESIGN → DELIVERY</span><span>Based in Canada · Open to AI automation & solutions roles</span></div>
       </section>
       <section id="work" className="work-section wrap">
-        <div className="section-heading"><div><span className="eyebrow">SELECTED WORK</span><h2>Ideas, made operational.</h2></div><span className="muted">Five projects. Different problems.<br/>The same care in the details.</span></div>
+        <div className="section-heading"><div><span className="eyebrow">SELECTED WORK</span><h2>Ideas, made operational.</h2></div><span className="muted">Agent systems, computer vision,<br/>automation, and applied ML.</span></div>
         <div className="featured-grid">{projects.slice(0,2).map(p => <article className="featured" key={p.id}>
-          <Link to={p.id === 'pitch-vision' ? '/pitch-vision/tactics/liverpool-madrid-five' : `/projects/${p.id}`} className="project-visual" aria-label={`Explore ${p.title}`}>{p.id === 'content-engine' ? <EngineDiagram/> : <PitchPreview/>}<span className="open-circle"><ArrowUpRight size={20}/></span></Link>
+          {p.id === 'pitch-vision'
+            ? <PitchStoryCarousel/>
+            : <Link to={`/projects/${p.id}`} className="project-visual" aria-label={`Explore ${p.title}`}><EngineDiagram/><span className="open-circle"><ArrowUpRight size={20}/></span></Link>}
           <div className="project-meta"><span>{p.number} / {p.kind}</span><span>{p.status}</span></div><h3><Link to={p.id === 'pitch-vision' ? '/pitch-vision/tactics/liverpool-madrid-five' : `/projects/${p.id}`}>{p.title}</Link></h3><p>{p.summary}</p><div className="tags">{p.stack.map(s => <span key={s}>{s}</span>)}</div>
         </article>)}</div>
-        <div className="small-projects">{projects.slice(2).map((p,i) => <Link to={`/projects/${p.id}`} className="small-project" key={p.id}>
-          <div className={`mini-visual mini-${i}`} aria-hidden="true">{i === 0 ? <><span className="metric-big">0.9961</span><span>WEIGHTED F1 · RECORDED EVALUATION</span><div className="mini-bars">{[97.2349,99.2208,99.6104,99.6104,99.6104].map((h,j) => <i key={j} style={{height:`${h}%`}}/>)}</div></> : i === 1 ? <><Layers size={48} strokeWidth={1}/><div className="category-labels"><span>Crack</span><span>Missing screw</span><span>Paint</span></div></> : <><div className="board-icon"><i/><i/><i/><i/><span>13</span></div><span>COMPONENT CLASSES</span></>}</div>
+        <AutomationShowcase/>
+        <div className="small-projects">{projects.slice(2).map(p => <Link to={`/projects/${p.id}`} className="small-project" key={p.id}>
+          <ProjectCover id={p.id}/>
           <span className="project-meta">{p.number} / {p.kind}</span><h3>{p.title}<ArrowUpRight size={19}/></h3><p>{p.summary}</p>
         </Link>)}</div>
       </section>
@@ -107,7 +111,7 @@ function CaseStudy() {
   if (!p) return <NotFound/>;
   if (p.id === 'pitch-vision') return <Navigate to="/pitch-vision/tactics/liverpool-madrid-five" replace/>;
   return <main className="case-study wrap"><Link to="/#work" className="back-link"><ArrowLeft size={16}/> Selected work</Link><div className="eyebrow">{p.kind} / {p.status}</div><h1>{p.title}</h1><p className="case-lead">{p.lead}</p><div className="tags">{p.stack.map(s => <span key={s}>{s}</span>)}</div>
-    {p.id === 'content-engine' && <EngineDiagram large/>}
+    {p.id === 'content-engine' && <><EngineDiagram large/><ContentEngineFlow/></>}
     {p.id === 'pitch-vision' && <div className="case-demo"><PitchPreview/><Link to="/pitch-vision/tactics/liverpool-madrid-five" className="button">Explore the match demo <ArrowRight size={17}/></Link></div>}
     <div className="case-columns"><aside><span className="eyebrow">THE BUILD</span><p>{p.kind}</p>{p.repo && <a className="text-link" href={p.repo} target="_blank" rel="noreferrer">View source <ArrowUpRight size={15}/></a>}</aside><div><section><h2>The problem</h2><p>{p.challenge}</p></section><section><h2>How I approached it</h2><p>{p.approach}</p></section><section><h2>What to inspect</h2><ul className="evidence-list">{p.evidence.map(e => <li key={e}><Check size={17}/>{e}</li>)}</ul></section><section><h2>The tradeoffs</h2><p>{p.tradeoff}</p></section><p className="source-note">{p.sourceNote}</p></div></div>
     {p.id === 'content-engine' && <ContentEngineEvidence/>}

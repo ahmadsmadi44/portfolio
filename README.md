@@ -1,6 +1,12 @@
-# Pitch Vision platform
+# Ahmad Al-Smadi portfolio
 
-This folder contains the Express API and React interface for the Liverpool vs Real Madrid five-minute tactical analysis. The one public project route is:
+This standalone repository contains Ahmad's warm-white React portfolio, the Football Match Analytics experience, and its optional Express API. It is intentionally separate from the parent Content Engine repository even though it currently lives inside that project folder.
+
+Key routes are:
+
+`/`
+
+`/projects/content-engine`
 
 `/pitch-vision/tactics/liverpool-madrid-five`
 
@@ -15,9 +21,11 @@ npm ci
 npm run dev
 ```
 
-Open `http://127.0.0.1:5173/pitch-vision/tactics/liverpool-madrid-five`.
+Open `http://127.0.0.1:5173/`.
 
-The checked-in `data/tactics/liverpool-madrid-five/tactical.json` drives the whole interface. Put the locally licensed excerpt at `data/tactics/liverpool-madrid-five/video.mp4` to enable synchronized footage; it is deliberately excluded from Git.
+The deployed frontend reads the checked-in static export at `frontend/public/tactics/liverpool-madrid-five.json`; no running API is required on Vercel. The locally licensed match excerpt is deliberately excluded from Git.
+
+The homepage has a reserved n8n walkthrough. Add the finished recording at `frontend/public/assets/automation/n8n-workflow-walkthrough.mp4`; the placeholder automatically becomes a video player.
 
 ## Validate
 
@@ -29,3 +37,7 @@ npm run build
 ```
 
 The API can read from the local data folder or object storage. See `infra/template.yaml` for the existing AWS deployment template.
+
+## Deploy
+
+Create a Vercel project with `frontend` as its root directory. `frontend/vercel.json` provides the single-page-app rewrite required for direct links to project routes.
