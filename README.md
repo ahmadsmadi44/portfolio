@@ -2,6 +2,8 @@
 
 This standalone repository contains Ahmad's warm-white React portfolio, the Football Match Analytics experience, and its optional Express API. It is intentionally separate from the parent Content Engine repository even though it currently lives inside that project folder.
 
+Live site: [ahmad-al-smadi-portfolio.vercel.app](https://ahmad-al-smadi-portfolio.vercel.app)
+
 Key routes are:
 
 `/`
