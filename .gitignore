@@ -5,3 +5,4 @@ data/matches/*/thumbnails/
 frontend/dist/
 .aws-sam/
 _to_delete/
+tmp/

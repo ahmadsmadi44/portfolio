@@ -7,11 +7,8 @@ const matchUrl = '/pitch-vision/tactics/liverpool-madrid-five';
 
 function DetectionPreview() {
   return <div className="cover-detection">
-    <img src="/assets/pitch-preview.jpg" alt="Measured football detections on the Liverpool and Real Madrid sample" />
-    <div className="detection-box box-one"><span>player · 0.91</span></div>
-    <div className="detection-box box-two"><span>player · 0.88</span></div>
-    <div className="detection-box box-three"><span>ball · 0.73</span></div>
-    <div className="cover-readout"><span className="live-dot"/> TRACKED FOOTAGE <strong>YOLO + BYTETRACK</strong></div>
+    <img src="/assets/pitch-detection-preview.jpg" alt="High-confidence YOLO detections on the Liverpool and Real Madrid sample" />
+    <div className="cover-readout"><span className="live-dot"/> 21 HIGH-CONFIDENCE TRACKS <strong>YOLO · REAL INFERENCE</strong></div>
   </div>;
 }
 
@@ -125,9 +122,21 @@ export function AutomationShowcase() {
 }
 
 export function ProjectCover({ id }) {
-  if (id === 'coordinate-classifier') return <div className="ml-cover coordinate-cover"><svg viewBox="0 0 360 190"><path d="M25 153 C80 145 87 100 140 101 S215 122 245 76 S305 48 340 38" fill="none" stroke="#788969" strokeWidth="2"/><path d="M25 142 C71 117 105 134 145 83 S236 90 265 52 S318 36 340 22" fill="none" stroke="#b3a77e" strokeWidth="1" strokeDasharray="4 5"/>{Array.from({length:26},(_,i)=><circle key={i} cx={30+(i*47)%305} cy={25+(i*71)%132} r="3.5" fill={i%3===0?'#bf7660':i%3===1?'#71886b':'#c3a75f'} opacity=".85"/>)}</svg><div><strong>0.9961</strong><span>weighted F1</span></div><small>STACKED ENSEMBLE · 5-FOLD CV</small></div>;
-  if (id === 'visual-inspection') return <div className="ml-cover inspection-cover"><div className="panel-surface"><i className="seam seam-a"/><i className="seam seam-b"/><span className="inspect-box crack"><b>01</b><em>CRACK</em></span><span className="inspect-box screw"><b>02</b><em>SCREW</em></span><span className="inspect-box paint"><b>03</b><em>PAINT</em></span></div><div className="inspection-footer"><span>CNN VISUAL INSPECTION</span><strong>3 defect classes</strong></div></div>;
-  return <div className="ml-cover pcb-cover"><svg viewBox="0 0 360 190"><rect x="50" y="23" width="260" height="144" rx="9" fill="#9cb39d" stroke="#6d896f"/><path d="M77 51H145V83H216V54H284 M79 137H122V110H184V140H268 M105 70V125 M246 72V132" fill="none" stroke="#d5dccd" strokeWidth="2" opacity=".7"/><g fill="#475e4a">{[[83,54,34,22],[158,42,50,35],[237,46,42,25],[68,105,46,34],[137,99,31,24],[199,91,63,39],[271,113,24,35]].map((r,i)=><rect key={i} x={r[0]} y={r[1]} width={r[2]} height={r[3]} rx="2"/>)}</g><g fill="none" stroke="#f4d879" strokeWidth="1.5">{[[74,46,50,39],[150,34,66,50],[229,38,58,41],[61,97,60,49],[190,82,80,56]].map((r,i)=><rect key={i} x={r[0]} y={r[1]} width={r[2]} height={r[3]} rx="2"/>)}</g></svg><div className="pcb-label"><strong>13</strong><span>component classes</span></div><small>YOLO11 · UNSEEN BOARD VALIDATION</small></div>;
+  const covers = {
+    'coordinate-classifier': { image: '/assets/project-covers/coordinate-model-evidence.jpg', alt: 'Spatial coordinate plot and confusion matrix from the trained classifiers', metric: '0.9961 weighted F1', label: 'MODEL COMPARISON · STRATIFIED 5-FOLD CV' },
+    'visual-inspection': { image: '/assets/project-covers/surface-inspection-evidence.jpg', alt: 'CNN training curve and a real aircraft surface defect sample', metric: '3 defect classes', label: 'CNN TRAINING · VISUAL GENERALIZATION' },
+    'component-detection': { image: '/assets/project-covers/pcb-detection-evidence.jpg', alt: 'YOLO component detections on an unseen Arduino Mega board', metric: '13 component classes', label: 'YOLO11 · UNSEEN BOARD VALIDATION' },
+  };
+  const cover = covers[id] || covers['component-detection'];
+  return <div className={`ml-cover evidence-cover ${id}`}><img src={cover.image} alt={cover.alt}/><div><span>{cover.label}</span><strong>{cover.metric}</strong></div></div>;
+}
+
+export function ContentEngineCover() {
+  return <div className="ce-home-cover" aria-label="Content Engine run preview">
+    <div className="ce-home-top"><span><i/><i/><i/> run/north_loam</span><b>48 NODES</b></div>
+    <div className="ce-home-flow"><div><small>INPUT</small><strong>Founder interview</strong><span>Client context</span></div><i>→</i><div><small>RAG</small><strong>Brand memory</strong><span>Tenant scoped</span></div><i>→</i><div><small>AGENT</small><strong>Content suite</strong><span>13 outputs</span></div></div>
+    <div className="ce-home-bottom"><span><b/> CHECKPOINTED</span><span>REVIEW → REVISE → APPROVE</span></div>
+  </div>;
 }
 
 export function ContentEngineFlow() {
