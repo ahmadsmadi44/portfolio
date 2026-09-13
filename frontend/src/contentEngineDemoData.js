@@ -21,12 +21,12 @@ export const demoDeliverables = [
   { at: 5, code: 'CAL', title: '4-Week Content Calendar', meta: '10 scheduled pieces', excerpt: 'Monthly theme: “The Ledger, Out Loud.” One source idea becomes a blog, LinkedIn series, carousel, newsletter, farm spotlight, and wholesale proof.' },
   { at: 6, code: 'BP', title: 'Blog Post', meta: 'long-form anchor', excerpt: 'In March, we paid the Bekele family 61% above Fair Trade minimum. Last September, another partner farm received 34% above minimum. We publish both because that is the point.' },
   { at: 7, code: 'LI', title: 'LinkedIn Post Set', meta: '5 channel-ready posts', excerpt: 'Founder story, sourcing data, a contrarian point of view, a wholesale pitch, and customer proof, each grounded in the same approved brand memory.' },
-  { at: 7, code: 'CAR', title: '8-Slide Carousel', meta: 'copy + image direction', excerpt: '“6 things nobody tells you about direct-trade coffee.” Each slide includes final copy and a brand-aware editorial image prompt.' },
-  { at: 7, code: 'IMG', title: 'Editorial Image Set', meta: '8 generated assets', excerpt: 'Warm natural light, terracotta, moss, kraft paper, real farms and hands. The image brief is retrieved from the client’s own visual direction.' },
+  { at: 7, code: 'CAR', title: 'Instagram Carousel', meta: '8 slides · copy + images', excerpt: '“6 things nobody tells you about direct-trade coffee.” Each slide includes final copy and a brand-aware editorial image prompt.' },
+  { at: 7, code: 'IMG', title: 'Editorial Image Set', meta: '12 generated images', excerpt: 'Warm natural light, terracotta, moss, kraft paper, real farms and hands. The image brief is retrieved from the client’s own visual direction.' },
   { at: 8, code: 'NL', title: 'Newsletter', meta: 'founder-led email', excerpt: 'A transparent note about this season’s 34% figure, why the less flattering number still gets published, and what the long-term farm commitment means.' },
   { at: 9, code: 'NTN', title: 'Notion Review Pages', meta: '9 pages synced', excerpt: 'Every republishable piece lands in Notion with its own status and review surface. A reviewer can approve, decline, or request a targeted change.' },
   { at: 10, code: 'SLK', title: 'Slack Review Notice', meta: 'review links delivered', excerpt: 'The reviewer receives one message with direct links. A revised piece is re-synced and the channel is notified again before the second review round.' },
-  { at: 11, code: 'OPS', title: 'Run Trace & Cost Report', meta: '48-node audit trail', excerpt: 'Per-node duration, attempts, provider metadata, token and image cost, checkpoint state, and failure details stay attached to the run.' },
+  { at: 11, code: 'OPS', title: 'Run Trace & Cost Tracking', meta: 'captured trace · cost methodology', excerpt: 'Per-node duration, attempts, provider metadata, token and image cost, checkpoint state, and failure details stay attached to the run.' },
 ];
 
 export const intakeHighlights = [

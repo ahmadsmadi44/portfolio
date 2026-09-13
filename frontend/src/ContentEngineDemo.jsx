@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Check, ChevronDown, Database, MessageSquare, Pause, Play, RefreshCw, Search, ShieldCheck, Workflow } from 'lucide-react';
+import ContentEngineArtifactViewer from './ContentEngineArtifactViewer';
 import { demoDeliverables, intakeHighlights, runNodes } from './contentEngineDemoData';
 import { reliabilityFacts, retrievalExample, revisionCycle } from './contentEngineEvidence';
 
@@ -8,7 +9,7 @@ const iconFor = type => ({ INPUT: MessageSquare, SEARCH: Search, RAG: Database, 
 export default function ContentEngineDemo() {
   const [step, setStep] = useState(-1);
   const [running, setRunning] = useState(false);
-  const [open, setOpen] = useState('BI');
+  const [selected, setSelected] = useState(null);
   useEffect(() => {
     if (!running) return;
     if (step >= runNodes.length - 1) { setRunning(false); return; }
@@ -17,7 +18,7 @@ export default function ContentEngineDemo() {
   }, [running, step]);
   const visible = useMemo(() => demoDeliverables.filter(item => item.at <= step), [step]);
   const finished = step >= runNodes.length - 1;
-  const start = () => { setStep(-1); setOpen('BI'); setRunning(true); };
+  const start = () => { setStep(-1); setSelected(null); setRunning(true); };
 
   return <section className="ce-run" aria-labelledby="ce-run-heading">
     <div className="ce-run-intro"><div><span className="eyebrow">INTERACTIVE SAMPLE RUN</span><h2 id="ce-run-heading">One interview enters. A complete content operation runs.</h2></div><p>Replay the recorded North Loam demo to see the intake become tenant memory, strategy, channel content, review pages, and an auditable delivery trail.</p></div>
@@ -36,7 +37,7 @@ export default function ContentEngineDemo() {
         </div>
         <div className="ce-output-panel">
           <div className="ce-panel-head"><span>Deliverables produced</span><span>{visible.length} / {demoDeliverables.length}</span></div>
-          <div className="ce-output-list">{demoDeliverables.map(item => { const ready=item.at <= step; return <button type="button" key={item.code} disabled={!ready} data-ready={ready} aria-expanded={ready && open===item.code} onClick={() => setOpen(open===item.code?'':item.code)}><span>{item.code}</span><div><strong>{item.title}</strong><small>{ready ? item.meta : 'waiting on upstream work'}</small>{ready && open===item.code && <p>{item.excerpt}</p>}</div>{ready ? open===item.code ? <ChevronDown size={14}/> : <Check size={14}/> : <i/>}</button>})}</div>
+          <div className="ce-output-list">{demoDeliverables.map(item => { const ready=item.at <= step; return <button type="button" key={item.code} disabled={!ready} data-ready={ready} aria-haspopup="dialog" onClick={() => setSelected(item)}><span>{item.code}</span><div><strong>{item.title}</strong><small>{ready ? item.meta : 'waiting on upstream work'}</small>{ready && <small className="artifact-open-label">Open deliverable →</small>}</div>{ready ? <ChevronDown size={14}/> : <i/>}</button>})}</div>
         </div>
       </div>
     </div>
@@ -47,5 +48,6 @@ export default function ContentEngineDemo() {
         <article><span className="ce-kicker">AUTOMATED QUALITY SIGNAL</span><h3><ShieldCheck size={17}/> Tone compliance</h3><div className="ce-score"><strong>94<small>/100</small></strong><span><i/></span></div><p>A second model scores each republishable piece against the client’s own voice guide. It informs the reviewer and never silently blocks delivery.</p></article>
       </div>
       <div className="ce-reliability"><div><span className="eyebrow">RELIABILITY & OPERATIONS</span><h2>Built for the next run, too.</h2><p>Recovery, visibility, and clear boundaries are part of the implementation.</p></div><div className="ce-reliability-items">{reliabilityFacts.map(f => <details key={f.title}><summary>{f.title}<ChevronDown size={18}/></summary><p>{f.body}</p><small>Verified by {f.verifiedBy}</small></details>)}</div></div>
+    {selected && <ContentEngineArtifactViewer key={selected.code} item={selected} onClose={() => setSelected(null)}/>}
   </section>;
 }
