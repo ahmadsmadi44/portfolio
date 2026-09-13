@@ -122,6 +122,10 @@ export function AutomationShowcase() {
 }
 
 export function ProjectCover({ id }) {
+  if (id === 'coordinate-classifier') return <div className="ml-cover spatial-cover" role="img" aria-label="Conceptual spatial classification illustration, with the model's 0.9961 weighted F1 result">
+    <svg viewBox="0 0 600 340" aria-hidden="true"><defs><pattern id="spatialGrid" width="30" height="30" patternUnits="userSpaceOnUse"><path d="M 30 0 L 0 0 0 30" fill="none" stroke="#d7dece" strokeWidth="1"/></pattern></defs><rect width="600" height="340" fill="#e9eee2"/><rect x="245" width="355" height="340" fill="url(#spatialGrid)"/><path d="M300 285 L470 195 L570 240 M470 195 L470 45" fill="none" stroke="#87967b" strokeWidth="2"/>{Array.from({length:30},(_,i) => {const group=Math.floor(i/10),n=i%10;return <circle key={i} cx={330+group*82+(n%3)*14} cy={225-group*65-Math.floor(n/3)*16+(n%2)*6} r="5" fill={['#56774f','#af895f','#819dac'][group]}/>})}<text x="565" y="263" fill="#637557" fontSize="15">x</text><text x="474" y="36" fill="#637557" fontSize="15">z</text><text x="282" y="303" fill="#637557" fontSize="15">y</text></svg>
+    <div className="spatial-cover-copy"><span>FROM POSITION<br/>TO PREDICTION</span><strong>0.9961</strong><small>weighted F1</small></div>
+  </div>;
   const covers = {
     'coordinate-classifier': { image: '/assets/project-covers/coordinate-model-evidence.jpg', alt: 'Spatial coordinate plot and confusion matrix from the trained classifiers', metric: '0.9961 weighted F1', label: 'MODEL COMPARISON · STRATIFIED 5-FOLD CV' },
     'visual-inspection': { image: '/assets/project-covers/surface-inspection-evidence.jpg', alt: 'CNN training curve and a real aircraft surface defect sample', metric: '3 defect classes', label: 'CNN TRAINING · VISUAL GENERALIZATION' },
@@ -135,7 +139,7 @@ export function ContentEngineCover() {
   return <div className="ce-home-cover" aria-label="Content Engine run preview">
     <div className="ce-home-top"><span><i/><i/><i/> run/north_loam</span><b>48 NODES</b></div>
     <div className="ce-home-flow"><div><small>INPUT</small><strong>Founder interview</strong><span>Client context</span></div><i>→</i><div><small>RAG</small><strong>Brand memory</strong><span>Tenant scoped</span></div><i>→</i><div><small>AGENT</small><strong>Content suite</strong><span>13 outputs</span></div></div>
-    <div className="ce-home-bottom"><span><b/> CHECKPOINTED</span><span>REVIEW → REVISE → APPROVE</span></div>
+    <div className="ce-home-bottom"><span><b/> CHECKPOINTED</span><span>HUMAN REVIEWED</span></div>
   </div>;
 }
 
