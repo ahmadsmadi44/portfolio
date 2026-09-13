@@ -136,10 +136,11 @@ export function ProjectCover({ id }) {
 }
 
 export function ContentEngineCover() {
-  return <div className="ce-home-cover" aria-label="Content Engine run preview">
-    <div className="ce-home-top"><span><i/><i/><i/> run/north_loam</span><b>48 NODES</b></div>
-    <div className="ce-home-flow"><div><small>INPUT</small><strong>Founder interview</strong><span>Client context</span></div><i>→</i><div><small>RAG</small><strong>Brand memory</strong><span>Tenant scoped</span></div><i>→</i><div><small>AGENT</small><strong>Content suite</strong><span>13 outputs</span></div></div>
-    <div className="ce-home-bottom"><span><b/> CHECKPOINTED</span><span>HUMAN REVIEWED</span></div>
+  return <div className="ce-editorial-cover" aria-label="Content Engine: from one interview to a complete North Loam content package">
+    <img className="ce-cover-background" src="/assets/content-engine/editorial-02-roastery-interior.png" alt="North Loam demo roastery"/>
+    <div className="ce-cover-caption"><span>THE CONTENT ENGINE</span><strong>One interview.<br/>An entire content studio.</strong></div>
+    <div className="ce-cover-stack" aria-hidden="true"><div className="ce-cover-document"><small>NORTH LOAM</small><strong>The story<br/>behind the cup.</strong><i/><i/><i/><span>Brand strategy</span></div><div className="ce-cover-photo"><img src="/assets/content-engine/carousel-01.png" alt=""/><span>How we source.</span><small>01 / 08 · INSTAGRAM</small></div></div>
+    <div className="ce-cover-bottom">STRATEGY · SOCIAL · EDITORIAL <span>13 deliverables</span></div>
   </div>;
 }
 

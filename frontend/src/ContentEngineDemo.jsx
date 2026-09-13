@@ -1,14 +1,17 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Check, ChevronDown, Database, MessageSquare, Pause, Play, RefreshCw, Search, ShieldCheck, Workflow } from 'lucide-react';
+import { Instagram, Linkedin, Slack, FileText, Images, Mail, CalendarDays, Palette, Fingerprint, ChartNoAxesCombined, Activity, Check, ChevronDown, Database, MessageSquare, Pause, Play, RefreshCw, Search, ShieldCheck, Workflow } from 'lucide-react';
 import ContentEngineArtifactViewer from './ContentEngineArtifactViewer';
 import { demoDeliverables, intakeHighlights, runNodes } from './contentEngineDemoData';
 import { reliabilityFacts, retrievalExample, revisionCycle } from './contentEngineEvidence';
 
+const groups=[{id:'brand',title:'Brand & strategy',codes:['BI','TV','DNA','CA','CAL']},{id:'content',title:'Content studio',codes:['BP','LI','CAR','IMG','NL']},{id:'delivery',title:'Review & delivery',codes:['NTN','SLK','OPS']}];
+const outputIcons={BI:Palette,TV:MessageSquare,DNA:Fingerprint,CA:ChartNoAxesCombined,CAL:CalendarDays,BP:FileText,LI:Linkedin,CAR:Instagram,IMG:Images,NL:Mail,SLK:Slack,OPS:Activity};
 const iconFor = type => ({ INPUT: MessageSquare, SEARCH: Search, RAG: Database, HUMAN: Pause, SYNC: Check, WEBHOOK: RefreshCw }[type] || Workflow);
 
 export default function ContentEngineDemo() {
   const [step, setStep] = useState(-1);
   const [running, setRunning] = useState(false);
+  const [category,setCategory]=useState('content');
   const [selected, setSelected] = useState(null);
   useEffect(() => {
     if (!running) return;
@@ -29,17 +32,16 @@ export default function ContentEngineDemo() {
         <dl>{intakeHighlights.map(([key,value]) => <div key={key}><dt>{key}</dt><dd>{value}</dd></div>)}</dl>
       </div>
       <div className="ce-console-actions"><button type="button" onClick={start} disabled={running}>{running ? <><Pause size={14}/> Run in progress</> : <><Play size={14} fill="currentColor"/> {finished ? 'Replay sample run' : 'Run the sample'}</>}</button><span>{finished ? 'Run complete · checkpoint saved' : running ? `${Math.max(step + 1, 0)} of ${runNodes.length} stages resolved` : 'Deterministic offline demo · no API keys required'}</span></div>
-      <div className="ce-run-grid">
-        <div className="ce-graph-panel">
-          <div className="ce-panel-head"><span>The workflow</span><span>12 stages · 48 nodes</span></div>
-          <div className="ce-node-grid">{runNodes.map((node,index) => { const Icon=iconFor(node.type); const state=finished || index < step ? 'done' : index === step ? 'active' : 'waiting'; return <div className="ce-run-node" data-state={state} key={node.id}><span className="ce-node-type">{String(index + 1).padStart(2, '0')} / {node.type}</span><Icon size={18}/><div><strong>{node.title}</strong><small>{node.detail}</small></div><b>{state === 'done' ? 'Complete ✓' : state === 'active' ? 'Running' : 'Pending'}</b></div>})}</div>
-          <div className="ce-run-status" role="status"><i data-running={running}/>{finished ? 'Approved · 13 deliverables recorded' : step >= 0 ? `Running: ${runNodes[Math.min(step, runNodes.length - 1)].title}` : 'Ready: founder interview loaded'}</div>
-        </div>
-        <div className="ce-output-panel">
-          <div className="ce-panel-head"><span>Deliverables produced</span><span>{visible.length} / {demoDeliverables.length}</span></div>
-          <div className="ce-output-list">{demoDeliverables.map(item => { const ready=item.at <= step; return <button type="button" key={item.code} disabled={!ready} data-ready={ready} aria-haspopup="dialog" onClick={() => setSelected(item)}><span>{item.code}</span><div><strong>{item.title}</strong><small>{ready ? item.meta : 'waiting on upstream work'}</small>{ready && <small className="artifact-open-label">Open deliverable →</small>}</div>{ready ? <ChevronDown size={14}/> : <i/>}</button>})}</div>
-        </div>
+      <div className="ce-journey" aria-label="Workflow progress">
+        {[['Discover','Interview, research & brand memory',0,4],['Create','Calendar, posts & visual storytelling',5,8],['Deliver','Notion, Slack & human review',9,11]].map(([title,detail,first,last],i)=><div key={title} data-state={step>last || finished?'done':step>=first?'active':'waiting'}><span>{step>last || finished?<Check size={18}/>:String(i+1).padStart(2,'0')}</span><div><strong>{title}</strong><small>{detail}</small></div></div>)}
       </div>
+      <div className="ce-run-status" role="status"><i data-running={running}/>{finished ? 'Approved · 13 deliverables recorded' : step >= 0 ? `Running: ${runNodes[Math.min(step, runNodes.length - 1)].title}` : 'Ready: founder interview loaded'}</div>
+      <div className="ce-deliverable-studio">
+        <div className="ce-studio-heading"><div><span className="eyebrow">THE OUTPUT</span><h3>Your content, ready to explore.</h3></div><span>{visible.length} / {demoDeliverables.length} ready</span></div>
+        <div className="ce-category-tabs" aria-label="Deliverable categories">{groups.map(group=><button key={group.id} aria-pressed={category===group.id} onClick={()=>setCategory(group.id)}>{group.title}<span>{demoDeliverables.filter(item=>group.codes.includes(item.code)&&item.at<=step).length}/{group.codes.length}</span></button>)}</div>
+        <div className="ce-output-list ce-output-cards">{demoDeliverables.filter(item=>groups.find(group=>group.id===category).codes.includes(item.code)).map(item=>{const ready=item.at<=step,Icon=outputIcons[item.code];return <button key={item.code} disabled={!ready} data-ready={ready} aria-haspopup="dialog" onClick={()=>setSelected(item)}><span className={`ce-platform-icon platform-${item.code}`}>{Icon?<Icon size={23}/>:<b className="notion-mark">N</b>}</span><div><strong>{item.title}</strong><small>{item.meta}</small><small className="artifact-open-label">{ready?'Open deliverable →':'Available as the demo runs'}</small></div></button>})}</div>
+      </div>
+      <details className="ce-workflow-details"><summary>Under the hood <span>12 stages · 48 nodes</span><ChevronDown size={18}/></summary><div className="ce-node-grid">{runNodes.map((node,index)=>{const Icon=iconFor(node.type);return <div className="ce-run-node" data-state={finished||index<step?'done':index===step?'active':'waiting'} key={node.id}><span className="ce-node-type">{String(index+1).padStart(2,'0')} / {node.type}</span><Icon size={18}/><div><strong>{node.title}</strong><small>{node.detail}</small></div></div>})}</div></details>
     </div>
       <div className="ce-section-heading"><span className="eyebrow">BEHIND THE WORKFLOW</span><h2>Context. Judgment. A human in control.</h2><p>The parts that turn content generation into a dependable client service.</p></div>
       <div className="ce-system-grid">
