@@ -1,6 +1,6 @@
 import {useEffect,useRef,useState} from 'react';
 import {Link,useParams} from 'react-router-dom';
-import {ArrowLeft,Play,Pause,ArrowRight,Eye,Activity} from 'lucide-react';
+import {ArrowLeft,Play,Pause,ArrowRight,ArrowUpRight,Eye,Activity} from 'lucide-react';
 import {useData,useVideoAvailable,PitchLines} from './PitchPrimitives';
 const fmt=(v,n=1)=>Number.isFinite(v)?v.toFixed(n):'—';
 const fallbackColors={1:'#f4eee0',2:'#55b4e5'};
@@ -44,7 +44,7 @@ export default function TacticalLab(){
  const displayPlayers=[...visibleById.values()];
  const roster=Object.entries(data.ratings||{}).map(([playerId,value])=>({id:playerId,...value}));
  const choosePlayer=playerId=>{setSelected(playerId);const visible=data.frames.findIndex(item=>item.players.some(p=>p.id===playerId));if(visible>=0)seek(visible)};
- return <main className="wrap tactical-lab"><div className="match-topline"><Link to="/#work" className="back-link"><ArrowLeft size={16}/> Selected work</Link><span className="lab-status"><i/>TACTICAL ANALYSIS</span></div>
+ return <main className="wrap tactical-lab"><div className="match-topline"><Link to="/#work" className="back-link"><ArrowLeft size={16}/> Selected work</Link><div className="lab-top-actions"><a href="https://github.com/ahmadsmadi44/pitch-vision-football-analytics" target="_blank" rel="noreferrer">View source <ArrowUpRight size={14}/></a><span className="lab-status"><i/>TACTICAL ANALYSIS</span></div></div>
   <header className="lab-heading"><div><span className="eyebrow">FOOTBALL / TACTICAL INTELLIGENCE</span><h1>Read the game.<br/><em>Follow the movement.</em></h1></div><p>A coach’s-eye view of shape, pressure and space. Every dot starts with a detection in the footage.</p></header>
   <div className="lab-source"><span><Eye size={15}/>{data.fixture||teams.map(item=>item.name).join(' vs ')} · {fmt(data.duration)} s</span><span>{data.source||'YOLO tracking pipeline'} · {fmt(data.summary.ballCoverage*100,0)}% retained ball path</span></div>
   {data.validation&&<section className="lab-quality" aria-label="Pipeline validation"><div><small>Player recall</small><strong>{fmt(data.validation.playerRecall35px*100,1)}%</strong></div><div><small>Player precision</small><strong>{fmt(data.validation.playerPrecision35px*100,1)}%</strong></div><div><small>Assigned-team accuracy</small><strong>{fmt(data.validation.teamAccuracy*100,1)}%</strong></div><div><small>Retained ball within 1 m</small><strong>{fmt(data.validation.ballWithin1m*100,0)}%</strong></div><p>Evaluated against matching SoccerTrack annotations. Ground truth is used for this audit only, never as inference input.</p></section>}
