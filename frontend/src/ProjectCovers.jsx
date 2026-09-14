@@ -89,7 +89,7 @@ export function PitchStoryCarousel() {
   ];
   const move = direction => setSlide(value => (value + direction + slides.length) % slides.length);
   return <div className="pitch-carousel" aria-roledescription="carousel" aria-label="Football Match Analytics previews">
-    <div className="carousel-stage">{slides.map((item,index) => <div key={item.label} className="carousel-slide" aria-hidden={slide !== index} data-active={slide === index}>{item.node}</div>)}</div>
+    <Link to={matchUrl} className="carousel-stage carousel-stage-link" aria-label="Open Football Match Analytics">{slides.map((item,index) => <div key={item.label} className="carousel-slide" aria-hidden={slide !== index} data-active={slide === index}>{item.node}</div>)}</Link>
     <div className="carousel-controls">
       <div><button type="button" onClick={() => move(-1)} aria-label="Previous preview"><ChevronLeft size={17}/></button><button type="button" onClick={() => move(1)} aria-label="Next preview"><ChevronRight size={17}/></button></div>
       <span><small>{slides[slide].label}</small>{slides[slide].title}</span>
@@ -116,8 +116,8 @@ export function AutomationShowcase() {
   const videoSrc = '/assets/automation/n8n-workflow-walkthrough.mp4';
   const available = useVideoAvailable(videoSrc);
   return <section className="automation-showcase" aria-labelledby="automation-heading">
-    <div className="automation-visual">{available ? <video controls preload="metadata" playsInline aria-label="n8n automation workflow walkthrough"><source src={videoSrc} type="video/mp4"/></video> : <AutomationFlowGraphic/>}</div>
-    <div className="automation-copy"><span className="eyebrow">AUTOMATION IN PRACTICE</span><h3 id="automation-heading">A workflow you can watch run.</h3><p>This reserved case study will follow one n8n automation from trigger to delivery, including the APIs, AI decisions, human checks, data handoff, and the operational result.</p><div className="tags"><span>n8n</span><span>API orchestration</span><span>AI agents</span><span>Human review</span></div><div className="automation-status"><span className="live-dot"/> {available ? 'Walkthrough available' : 'Walkthrough recording coming next'}</div></div>
+    <div className="automation-visual">{available ? <video controls preload="metadata" playsInline poster="/assets/automation/outbound-engine-poster.jpg" aria-label="Outbound Engine n8n automation workflow walkthrough"><source src={videoSrc} type="video/mp4"/></video> : <AutomationFlowGraphic/>}</div>
+    <div className="automation-copy"><span className="eyebrow">AUTOMATION IN PRACTICE</span><h3 id="automation-heading">Outbound Engine, end to end.</h3><p>Watch the working n8n system source leads, enrich contact and LinkedIn data, merge the results, draft personalized outreach with AI, sync the record to HubSpot, and prepare delivery.</p><div className="tags"><span>n8n</span><span>Apify</span><span>HubSpot</span><span>AI personalization</span></div><div className="automation-status"><span className="live-dot"/> {available ? 'Full walkthrough available · 1:57' : 'Walkthrough recording loading'}</div></div>
   </section>;
 }
 
