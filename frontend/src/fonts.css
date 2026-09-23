@@ -1,0 +1,9 @@
+/* Latin-only variable fonts for the Glass variants (kept small for the single-file build). */
+@font-face { font-family: 'Space Grotesk V'; font-style: normal; font-display: swap; font-weight: 300 700; src: url('./assets/fonts/space-grotesk-latin-wght-normal.woff2') format('woff2'); }
+@font-face { font-family: 'JetBrains Mono V'; font-style: normal; font-display: swap; font-weight: 100 800; src: url('./assets/fonts/jetbrains-mono-latin-wght-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Fraunces V'; font-style: normal; font-display: swap; font-weight: 100 900; src: url('./assets/fonts/fraunces-latin-wght-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Fraunces V'; font-style: italic; font-display: swap; font-weight: 100 900; src: url('./assets/fonts/fraunces-latin-wght-italic.woff2') format('woff2'); }
+@font-face { font-family: 'Unbounded V'; font-style: normal; font-display: swap; font-weight: 200 900; src: url('./assets/fonts/unbounded-latin-wght-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Bricolage Grotesque V'; font-style: normal; font-display: swap; font-weight: 200 800; src: url('./assets/fonts/bricolage-grotesque-latin-wght-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Manrope V'; font-style: normal; font-display: swap; font-weight: 200 800; src: url('./assets/fonts/manrope-latin-wght-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Sora V'; font-style: normal; font-display: swap; font-weight: 100 800; src: url('./assets/fonts/sora-latin-wght-normal.woff2') format('woff2'); }
