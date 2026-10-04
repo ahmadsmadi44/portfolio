@@ -9,3 +9,8 @@ declare module "@/legacy/ContentEngineDemo.jsx" {
   const ContentEngineDemo: FC;
   export default ContentEngineDemo;
 }
+declare module "@/legacy/FootballTabs.jsx" {
+  import type { FC } from "react";
+  const FootballTabs: FC<{ matchId?: string; initialTab?: "tactics" | "shots" }>;
+  export default FootballTabs;
+}

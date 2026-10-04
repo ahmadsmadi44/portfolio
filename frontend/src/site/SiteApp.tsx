@@ -8,7 +8,7 @@ import GlassLayout, { type GlassVariant } from "@/demos/glass/GlassLayout";
 import ProjectPage from "@/demos/glass/ProjectPage";
 import { EDITORIAL } from "@/demos/glass/variants";
 import { ALL_PROJECTS, NAME, PROJECTS } from "@/data/content";
-import TacticalLab from "@/legacy/TacticalLab.jsx";
+import FootballTabs from "@/legacy/FootballTabs.jsx";
 import ContentEngineDemo from "@/legacy/ContentEngineDemo.jsx";
 import "@/legacy/legacy.css";
 import SiteAbout from "./SiteAbout";
@@ -58,8 +58,8 @@ function Title({ text }: { text: string }) {
   return null;
 }
 
-const renderEmbed = (kind: "tactical-lab" | "content-engine", matchId = MATCH) =>
-  kind === "tactical-lab" ? <TacticalLab embeddedId={matchId} /> : <ContentEngineDemo />;
+const renderEmbed = (kind: "tactical-lab" | "content-engine", matchId = MATCH, initialTab: "tactics" | "shots" = "tactics") =>
+  kind === "tactical-lab" ? <FootballTabs matchId={matchId} initialTab={initialTab} /> : <ContentEngineDemo />;
 
 function ProjectRoute() {
   const { id = "" } = useParams();
@@ -86,6 +86,15 @@ function MatchRoute() {
   );
 }
 
+function ShotsRoute() {
+  return (
+    <>
+      <Title text={`Football Match Analytics | ${NAME}`} />
+      <ProjectPage key="pitch-vision-shots" v={SITE} projectId="pitch-vision" homeHref="/#projects" hrefFor={hrefFor} renderEmbed={(k) => renderEmbed(k, MATCH, "shots")} />
+    </>
+  );
+}
+
 function NotFound() {
   return (
     <div className="demo-root flex min-h-screen flex-col items-center justify-center gap-6 px-6 text-center" style={{ ...(SITE.vars as object), fontFamily: SITE.fontBody }}>
@@ -106,6 +115,7 @@ export default function SiteApp() {
         <Route path="/projects/:id" element={<ProjectRoute />} />
         <Route path="/pitch-vision" element={<Navigate to={hrefFor("pitch-vision")} replace />} />
         <Route path="/pitch-vision/tactics/:id" element={<MatchRoute />} />
+        <Route path="/pitch-vision/shots/:id" element={<ShotsRoute />} />
         <Route path="/pitch-vision/:id" element={<Navigate to={hrefFor("pitch-vision")} replace />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

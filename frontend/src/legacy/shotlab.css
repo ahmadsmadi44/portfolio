@@ -1,0 +1,58 @@
+/* Shot Lab (xG tab). Reuses the lab's own cards and tokens; everything is scoped under .legacy. */
+.legacy .sl-root{display:grid;gap:22px}
+.legacy .sl-heading{display:flex;justify-content:space-between;align-items:flex-end;gap:24px}
+.legacy .sl-heading p{max-width:340px;margin:0;color:var(--muted);font-size:14px;line-height:1.55}
+.legacy .sl-title{font-size:clamp(2rem,4.4vw,3.2rem);line-height:1.02;margin:12px 0 0}
+.legacy .sl-title em{color:var(--olive);font-style:italic}
+.legacy .sl-fixture{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:20px;padding:22px 26px;border:1px solid #ffffffd9;border-radius:18px;background:linear-gradient(145deg,#ffffffc9,#ffffff82);box-shadow:inset 0 1px 0 #fff,0 20px 60px #31443110}
+.legacy .sl-fixture>div{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center}
+.legacy .sl-fixture strong{font-size:15px}
+.legacy .sl-fixture small{font-family:'JetBrains Mono V',ui-monospace,monospace;font-size:10px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+.legacy .sl-score{display:flex;flex-direction:column;align-items:center;gap:4px;font-family:'Fraunces V',Georgia,serif;font-size:2.4rem;letter-spacing:-.03em;color:var(--olive)}
+.legacy .sl-flag{display:block;width:66px;aspect-ratio:3/2;border-radius:7px;overflow:hidden;box-shadow:0 0 0 1px #17140f1f,0 4px 12px #17140f1a}
+.legacy .sl-flag svg{display:block;width:100%;height:100%}
+.legacy .sl-context{display:flex;align-items:flex-start;gap:10px;padding:12px 16px;border:1px solid var(--line);border-radius:12px;color:var(--muted);font-size:12.5px;line-height:1.55}
+.legacy .sl-context svg{flex:none;margin-top:2px;color:var(--olive)}
+.legacy .sl-player-filter{display:flex;align-items:center;gap:9px;color:var(--muted);font-size:12px}
+.legacy .sl-player-filter select{appearance:none;-webkit-appearance:none;min-width:170px;max-width:230px;padding:8px 32px 8px 12px;border:1px solid var(--line);border-radius:9px;color:var(--ink);font:inherit;cursor:pointer;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none' stroke='%236e665a' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M1 1l4 4 4-4'/%3E%3C/svg%3E") no-repeat right 11px center}
+.legacy .sl-player-filter select:focus-visible{outline:2px solid var(--olive);outline-offset:2px}
+.legacy .team-switch button i{display:inline-block;width:8px;height:8px;border-radius:50%}
+.legacy .sl-field .field-caption span{display:flex;align-items:center;gap:7px}
+.legacy .sl-dot{display:inline-block;width:8px;height:8px;border-radius:50%}
+.legacy .sl-shot{cursor:pointer;outline:none;-webkit-tap-highlight-color:transparent}
+.legacy .sl-shot:focus,.legacy .sl-shot:focus-visible{outline:none}
+.legacy .sl-halo{fill:#fff;fill-opacity:.16;stroke:none}
+.legacy .sl-ring{fill:none;stroke:#fff;stroke-width:.42}
+.legacy .sl-shot:focus-visible .sl-ring{stroke-dasharray:1.1 .7}
+.legacy .sl-note{margin:0;padding:12px 18px 16px;font-size:12px;line-height:1.55;color:var(--muted)}
+.legacy .sl-data-note{margin:16px 0 0;font-size:12.5px;line-height:1.55;color:var(--muted)}
+.legacy .sl-players .panel-heading span{font-family:'JetBrains Mono V',ui-monospace,monospace;font-size:11px;color:var(--muted)}
+.legacy .sl-player-list{display:grid;max-height:420px;overflow:auto}
+.legacy .sl-player-list button{display:grid;grid-template-columns:62px 1fr;align-items:center;gap:12px;padding:13px 4px;border:0;border-bottom:1px solid var(--line);background:transparent;color:var(--ink);text-align:left;font:inherit;cursor:pointer;transition:background-color .15s}
+.legacy .sl-player-list button:hover{background:#17140f08}
+.legacy .sl-player-list button>span{font-size:11px;color:var(--olive);font-weight:600}
+.legacy .sl-player-list strong{display:block;font-size:13px}
+.legacy .sl-player-list small{font-family:'JetBrains Mono V',ui-monospace,monospace;font-size:10px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+.legacy .sl-sb{height:22px;margin-left:10px;vertical-align:middle}
+.legacy .sl-root .lab-quality strong{font-family:'Fraunces V',Georgia,serif;font-weight:380}
+
+/* Football tab switch */
+.legacy .fb-tabs{display:flex;justify-content:center;margin:0 0 26px}
+.legacy .fb-tabs>div{display:inline-flex;gap:4px;padding:4px;border:1px solid var(--line);border-radius:999px;background:#ffffffa8}
+.legacy .fb-tabs button{display:flex;align-items:baseline;gap:9px;padding:10px 20px;border:0;border-radius:999px;background:transparent;color:var(--muted);font:inherit;font-size:14px;font-weight:550;cursor:pointer;transition:background-color .18s,color .18s}
+.legacy .fb-tabs button small{font-family:'JetBrains Mono V',ui-monospace,monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;opacity:.75}
+.legacy .fb-tabs button:hover{color:var(--ink)}
+.legacy .fb-tabs button[aria-selected="true"]{background:var(--ink);color:#fff}
+.legacy .fb-tabs button:focus-visible{outline:2px solid var(--olive);outline-offset:2px}
+
+@media (max-width:820px){
+  .legacy .sl-heading{flex-direction:column;align-items:flex-start}
+  .legacy .sl-fixture{padding:16px 10px;gap:8px}
+  .legacy .sl-flag{width:52px}
+  .legacy .sl-score{font-size:1.9rem}
+  .legacy .sl-player-filter{width:100%;justify-content:space-between}
+  .legacy .sl-player-filter select{max-width:68%}
+  .legacy .fb-tabs>div{width:100%}
+  .legacy .fb-tabs button{flex:1;flex-direction:column;align-items:center;gap:2px;padding:9px 8px;font-size:13px}
+}
+.legacy .sl-root .phase-card h2{font-family:'Inter Tight Variable',ui-sans-serif,system-ui,sans-serif;font-weight:600;font-size:1.3rem;letter-spacing:-.02em;margin:12px 0 18px}
