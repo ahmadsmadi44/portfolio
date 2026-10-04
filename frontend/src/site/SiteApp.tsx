@@ -80,7 +80,7 @@ function MatchRoute() {
   const { id = MATCH } = useParams();
   return (
     <>
-      <Title text={`Football Match Analytics | ${NAME}`} />
+      <Title text={`Matchlens | ${NAME}`} />
       <ProjectPage key="pitch-vision" v={SITE} projectId="pitch-vision" homeHref="/#projects" hrefFor={hrefFor} renderEmbed={(k) => renderEmbed(k, id)} />
     </>
   );
@@ -89,7 +89,7 @@ function MatchRoute() {
 function ShotsRoute() {
   return (
     <>
-      <Title text={`Football Match Analytics | ${NAME}`} />
+      <Title text={`Matchlens | ${NAME}`} />
       <ProjectPage key="pitch-vision-shots" v={SITE} projectId="pitch-vision" homeHref="/#projects" hrefFor={hrefFor} renderEmbed={(k) => renderEmbed(k, MATCH, "shots")} />
     </>
   );

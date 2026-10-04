@@ -89,7 +89,7 @@ export const ALL_PROJECTS = [
     cover: "/assets/pitch-detection-preview.jpg",
     coverVideo: "/assets/pitch-vision/demo-card.mp4",
     visual: "pitch-vision",
-    title: "Football Match Analytics",
+    title: "Matchlens",
     dates: "Computer vision → full stack",
     description: "Raw footage to tracked players, ratings, and tactics.",
     tech: ["YOLO11", "ByteTrack", "React"],

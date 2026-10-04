@@ -88,13 +88,13 @@ export function PitchStoryCarousel() {
     { label: '03 · Understand', title: 'Shape becomes tactical evidence', node: <TacticsPreview data={data} active={slide === 2}/> },
   ];
   const move = direction => setSlide(value => (value + direction + slides.length) % slides.length);
-  return <div className="pitch-carousel" aria-roledescription="carousel" aria-label="Football Match Analytics previews">
-    <Link to={matchUrl} className="carousel-stage carousel-stage-link" aria-label="Open Football Match Analytics">{slides.map((item,index) => <div key={item.label} className="carousel-slide" aria-hidden={slide !== index} data-active={slide === index}>{item.node}</div>)}</Link>
+  return <div className="pitch-carousel" aria-roledescription="carousel" aria-label="Matchlens previews">
+    <Link to={matchUrl} className="carousel-stage carousel-stage-link" aria-label="Open Matchlens">{slides.map((item,index) => <div key={item.label} className="carousel-slide" aria-hidden={slide !== index} data-active={slide === index}>{item.node}</div>)}</Link>
     <div className="carousel-controls">
       <div><button type="button" onClick={() => move(-1)} aria-label="Previous preview"><ChevronLeft size={17}/></button><button type="button" onClick={() => move(1)} aria-label="Next preview"><ChevronRight size={17}/></button></div>
       <span><small>{slides[slide].label}</small>{slides[slide].title}</span>
       <div className="carousel-dots" aria-label="Choose preview">{slides.map((item,index) => <button key={item.label} type="button" aria-label={`Show ${item.title}`} aria-current={slide === index ? 'true' : undefined} onClick={() => setSlide(index)}/>)}</div>
-      <Link to={matchUrl} aria-label="Open Football Match Analytics"><ArrowRight size={17}/></Link>
+      <Link to={matchUrl} aria-label="Open Matchlens"><ArrowRight size={17}/></Link>
     </div>
   </div>;
 }

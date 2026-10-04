@@ -8,7 +8,7 @@
   "sourceCommit": "4b73468fc5b0f1950f9f66fada70ad3a4f9327cb",
   "eventUrl": "https://github.com/hudl/open-data/blob/4b73468fc5b0f1950f9f66fada70ad3a4f9327cb/data/events/8658.json",
   "model": {
-    "name": "Pitch Vision xG baseline",
+    "name": "Matchlens xG baseline",
     "features": [
       "distance_m",
       "angle_rad",

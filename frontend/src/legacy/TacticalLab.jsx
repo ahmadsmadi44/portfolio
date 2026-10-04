@@ -3,6 +3,7 @@ import {Link,useParams} from 'react-router-dom';
 import {ArrowLeft,Play,Pause,ArrowRight,ArrowUpRight,Eye,Activity} from 'lucide-react';
 import {useData,useVideoAvailable,PitchLines} from './PitchPrimitives';
 const fmt=(v,n=1)=>Number.isFinite(v)?v.toFixed(n):'—';
+const crestFor=n=>/liverpool/i.test(n||'')?'/assets/liverpool.png':/madrid/i.test(n||'')?'/assets/real-madrid.png':null;
 const fallbackColors={1:'#f4eee0',2:'#55b4e5'};
 const shortName=name=>name?.split(' ').at(-1)??'Player';
 function ActivityHeatmap({positions=[]}){
@@ -48,7 +49,7 @@ export default function TacticalLab({embeddedId}={}){
   <header className="lab-heading"><div><span className="eyebrow">FOOTBALL / TACTICAL INTELLIGENCE</span><h1>Read the game.<br/><em>Follow the movement.</em></h1></div><p>A coach’s-eye view of shape, pressure and space. Every dot starts with a detection in the footage.</p></header></>}
   <div className="lab-source"><span><Eye size={15}/>{data.fixture||teams.map(item=>item.name).join(' vs ')} · {fmt(data.duration)} s</span><span>{data.source||'YOLO tracking pipeline'} · {fmt(data.summary.ballCoverage*100,0)}% retained ball path</span></div>
   {data.validation&&<section className="lab-quality" aria-label="Pipeline validation"><div><small>Player recall</small><strong>{fmt(data.validation.playerRecall35px*100,1)}%</strong></div><div><small>Player precision</small><strong>{fmt(data.validation.playerPrecision35px*100,1)}%</strong></div><div><small>Assigned-team accuracy</small><strong>{fmt(data.validation.teamAccuracy*100,1)}%</strong></div><div><small>Retained ball within 1 m</small><strong>{fmt(data.validation.ballWithin1m*100,0)}%</strong></div><p>Evaluated against matching SoccerTrack annotations. Ground truth is used for this audit only, never as inference input.</p></section>}
-  <div className="lab-layout"><section className="lab-board-card"><div className="lab-toolbar"><div className="team-switch" aria-label="Analysis perspective">{data.teams.map(t=><button key={t.id} aria-pressed={team===t.id} onClick={()=>setTeam(t.id)}><i style={{background:colors[t.id]}}/>{t.name}</button>)}</div><div className="overlay-switch">{[['Shape',links,setLinks],['Space',space,setSpace],['Pass lanes',lanes,setLanes]].map(([name,value,set])=><button key={name} aria-pressed={value} onClick={()=>set(!value)}>{name}</button>)}</div></div>
+  <div className="lab-layout"><section className="lab-board-card"><div className="lab-toolbar"><div className="team-switch" aria-label="Analysis perspective">{data.teams.map(t=><button key={t.id} aria-pressed={team===t.id} onClick={()=>setTeam(t.id)}>{crestFor(t.name)?<img className="team-crest" src={crestFor(t.name)} alt=""/>:<i style={{background:colors[t.id]}}/>}{t.name}</button>)}</div><div className="overlay-switch">{[['Shape',links,setLinks],['Space',space,setSpace],['Pass lanes',lanes,setLanes]].map(([name,value,set])=><button key={name} aria-pressed={value} onClick={()=>set(!value)}>{name}</button>)}</div></div>
    <div className="tactical-field"><svg viewBox="-3 -3 111 74" role="group" aria-label={`Measured player positions at ${fmt(frame.time)} seconds`}>
     <defs><marker id="lane-arrow" markerWidth="4" markerHeight="4" refX="3" refY="2" orient="auto"><path d="M0 0L4 2L0 4" fill="#edd484"/></marker></defs>
     <rect x="0" y="0" width="105" height="68" fill="#126849"/>

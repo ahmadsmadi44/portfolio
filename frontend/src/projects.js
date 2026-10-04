@@ -12,7 +12,7 @@ export const projects = [
     sourceNote: 'Architecture and test results checked against the local source, its README, and its own test suite.',
   },
   {
-    id: 'pitch-vision', number: '02', title: 'Football Match Analytics', kind: 'Computer vision → full stack', status: 'Interactive demo',
+    id: 'pitch-vision', number: '02', title: 'Matchlens', kind: 'Computer vision → full stack', status: 'Interactive demo',
     summary: 'Football footage becomes tracked movement, player analytics, and a tactical view of shape, pressure, space, and phase of play.',
     stack: ['YOLO', 'OpenCV', 'SciPy', 'React', 'Node.js'],
     lead: 'A match-analytics platform that connects a computer-vision pipeline to an interface you can explore.',
