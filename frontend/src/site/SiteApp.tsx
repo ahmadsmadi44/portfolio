@@ -12,6 +12,7 @@ import FootballTabs from "@/legacy/FootballTabs.jsx";
 import ContentEngineDemo from "@/legacy/ContentEngineDemo.jsx";
 import "@/legacy/legacy.css";
 import SiteAbout from "./SiteAbout";
+import { HackathonsSection } from "./Hackathons";
 
 /**
  * The real, deployable portfolio: Editorial in Paper & Ink, with clean URLs.
@@ -21,7 +22,7 @@ import SiteAbout from "./SiteAbout";
 const MATCH = "liverpool-madrid-five";
 const hrefFor = (id: string) => (id === "pitch-vision" ? `/pitch-vision/tactics/${MATCH}` : `/projects/${id}`);
 
-const SITE: GlassVariant = { ...EDITORIAL, projectHref: hrefFor, useCovers: true, Extras: SiteAbout };
+const SITE: GlassVariant = { ...EDITORIAL, projectHref: hrefFor, useCovers: true, Extras: SiteAbout, AfterWork: HackathonsSection };
 
 /** Same-origin <a href> clicks become client-side navigations (no full reload). */
 function LinkInterceptor() {

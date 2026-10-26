@@ -50,6 +50,8 @@ export type GlassVariant = {
   Extras?: FC;
   /** skill chips gently bob (chips mode) */
   floaty?: boolean;
+  /** optional home section slotted right after work (e.g. Hackathons) */
+  AfterWork?: FC;
 };
 
 const glowBg =
@@ -262,6 +264,8 @@ export default function GlassLayout({ v }: { v: GlassVariant }) {
             </ol>
           )}
         </section>
+
+        {v.AfterWork && <v.AfterWork />}
 
         {v.Extras && <v.Extras />}
 

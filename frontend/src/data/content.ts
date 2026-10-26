@@ -151,3 +151,40 @@ const HIDDEN = new Set<string>(["coordinate-classifier", "visual-inspection"]);
 
 /** The projects shown on the site: Content Engine, Football, Outbound Engine, PCB Detection. */
 export const PROJECTS = ALL_PROJECTS.filter((p) => !HIDDEN.has(p.id));
+
+/**
+ * Hackathons and research sprints (shown as a timeline under experience).
+ * Links with `video` open the clip in an in-page player instead of a new tab.
+ */
+export const HACKATHONS = [
+  {
+    id: "apart-collusion",
+    event: "AI Collusion Research Sprint",
+    org: "Apart Research",
+    mark: "apart",
+    project: "Cartels Built on Visible Demand",
+    detail: "with Mustafa Naqvie",
+    dates: "Oct 2026",
+    blurb: "Forked LLM seller cartels into 983 markets to test which single restriction breaks collusion. Most barely moved prices; whether sellers can see buyers' bids is what matters.",
+    links: [
+      { label: "Report", kind: "doc", href: "https://pys8vc40ox3z7qxp.public.blob.vercel-storage.com/submissions/ai-collusion-research-sprint-2026-10-23-to-2026-10-25/Cartels-Built-on-Visible-Demand---FINAL-Apart-template--UlWpGlVQTm7hllGmIAkSaWk5By5Y87.pdf" },
+      { label: "Code", kind: "github", href: "https://github.com/ahmadsmadi44/llm-cartels-visible-demand" },
+      { label: "Project page", kind: "link", href: "https://apartresearch.com/sprints/projects/cartels-built-on-visible-demand-single-restrictions-rarely-break-established-llm-seller-cartels-as0t" },
+    ],
+  },
+  {
+    id: "amazon-ring",
+    event: "Amazon App Developer Hackathon",
+    org: "Ring track",
+    mark: "amazon",
+    project: "DoorRelay Guard",
+    detail: "solo build",
+    dates: "Oct 2026",
+    blurb: "Watches a delivered parcel on a Ring camera stream, asks the resident before acting, and lets a paired phone at the door ask a would-be thief to put it back.",
+    links: [
+      { label: "Film", kind: "video", href: "/assets/hackathons/doorrelay-film.mp4", poster: "/assets/hackathons/doorrelay-film-poster.jpg", length: "0:22" },
+      { label: "How it sees", kind: "video", href: "/assets/hackathons/doorrelay-how-it-sees.mp4", poster: "/assets/hackathons/doorrelay-how-it-sees-poster.jpg", length: "0:30" },
+      { label: "Repo", kind: "github", href: "https://github.com/ahmadsmadi44/doorrelay-guard" },
+    ],
+  },
+] as const;
